@@ -1,4 +1,9 @@
-# SAD-hub
+# SAD-hub   
 
-Requires 'pip install setuptools docopts'
-Use 'pip install -e .' from SAD-hub directory, and then run with 'ssa'.
+#### Python   
+#### SQLite   
+#### Feature Branch Workflow   
+ 
+### To Use:   
+Requires 'pip install setuptools docopts' to install.
+Use 'pip install -e .' from SAD-hub directory to install, and then run with 'ssa'   
