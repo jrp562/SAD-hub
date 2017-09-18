@@ -30,9 +30,42 @@ def Menu(user, status, cart):
                 print (str(i) + '. ' + item)
                 i = i + 1
             print ('')
-            print ('************* Cart Options *****************')
+            print ('************* Options *****************')
             print("1. Add an item to cart.")
-            print("2. View Desription.")
+            print("2. View Details.")
+            print("3. Go Back.")
+            selection = int(input("Please make a selection: "))
+
+            if selection == 1:
+                # do crazy shit
+                pass
+
+            elif selection == 2:
+                #cart.purchaseCart()
+                pass
+
+            elif selection == 3:
+                os.system('cls' if os.name == 'nt' else 'clear')
+                selection = Menu(user, user.status, cart)
+
+            else:
+                erroneousInput(user, cart)
+
+
+        elif selection == 3:
+            #get data from cart and add to list
+            os.system('cls' if os.name == 'nt' else 'clear')
+            print ('*********** Your Cart ************')
+            itemList = ['dildo', 'Grapefruit', 'KY', 'How to Use a Dildo by Pinky']
+            i = 1
+            for item in itemList:
+                print (str(i) + '. ' + item)
+                i = i + 1
+            print ('')
+            print ('************* Cart Options *****************')
+            print("1. Remove an item from cart.")
+            print("2. Purchase cart.")
+            print("3. Go Back.")
             selection = int(input("Please make a selection: "))
 
             if selection == 1:
@@ -43,16 +76,18 @@ def Menu(user, status, cart):
                 #purchaseCart()
                 pass
 
-        elif selection == 3:
-            cart.showItems()
-            selection = Menu(user, status, cart)
+            elif selection == 3:
+                os.system('cls' if os.name == 'nt' else 'clear')
+                selection = Menu(user, user.status, cart)
+
+            else:
+                erroneousInput(user, cart)
 
         elif selection == 4:
             exit()
 
         else:
-            print("Invalid selection, please try again.")
-            selection = Menu(user, status, cart)
+            erroneousInput(user, cart)
 
         return selection
 
@@ -68,7 +103,7 @@ def Menu(user, status, cart):
 
         if selection == 1:
             user.getPurchaseHistory()
-            selection = Menu(user, status, cart)
+            selection = Menu(user, user.status, cart)
 
         elif selection == 2:
             #access db to get itemList
@@ -80,9 +115,35 @@ def Menu(user, status, cart):
                 print (str(i) + '. ' + item)
                 i = i + 1
             print ('')
-            print ('************* Cart Options *****************')
+            print ('*************** Options *****************')
             print("1. Add an item to cart.")
-            print("2. View Desription.")
+            print("2. Go Back.")
+            selection = int(input("Please make a selection: "))
+
+            if selection == 1:
+                # do crazy shit
+                pass
+
+            elif selection == 2:
+                os.system('cls' if os.name == 'nt' else 'clear')
+                selection = Menu(user, user.status, cart)
+
+            else:
+                erroneousInput(user, cart)
+
+        elif selection == 3:
+            os.system('cls' if os.name == 'nt' else 'clear')
+            print ('***********' + user.username + ' Cart ************')
+            itemList = ['dildo', 'Grapefruit', 'KY', 'How to Use a Dildo by Pinky']
+            i = 1
+            for item in itemList:
+                print (str(i) + '. ' + item)
+                i = i + 1
+            print ('')
+            print ('************* Cart Options *****************')
+            print("1. Remove an item from cart.")
+            print("2. Purchase cart.")
+            print("3. Go Back.")
             selection = int(input("Please make a selection: "))
 
             if selection == 1:
@@ -93,18 +154,25 @@ def Menu(user, status, cart):
                 #purchaseCart()
                 pass
 
-        elif selection == 3:
-            cart.showItems()
-            pass
+            elif selection == 3:
+                os.system('cls' if os.name == 'nt' else 'clear')
+                selection = Menu(user, user.status, cart)
+
+            else:
+                erroneousInput(user, cart)
 
         elif selection == 4:
             exit()
 
         else:
-            print("Invalid selection, please try again.")
-            os.system('cls' if os.name == 'nt' else 'clear')
-            selection = Menu(user, status, cart)
+            erroneousInput(user, cart)
 
 
 def itemMenu(itemList):
     pass
+
+
+def erroneousInput(user, cart):
+    os.system('cls' if os.name == 'nt' else 'clear')
+    print("Invalid selection, please try again.")
+    selection = Menu(user, user.status, cart)
