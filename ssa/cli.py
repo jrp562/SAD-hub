@@ -6,5 +6,5 @@ def main():
 
     os.system('cls' if os.name == 'nt' else 'clear')
     user = User()
-    cart = Cart()
-    Menu(user, user.status)
+    cart = Cart(user)
+    Menu(user, user.status, cart)
