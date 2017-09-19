@@ -24,3 +24,15 @@ class User:
         for item in itemList:
             print (str(i) + '. ' + item + '    Date: 12/23/2016')
             i = i + 1
+	
+	def getUserAddress(self):
+		return self.address
+	
+	def logout(self):
+		self.username = ''
+        self.password = ''
+        self.address = ''
+        self.status = 'not_logged_in'
+		
+	def getUserID(self):
+		return self.username
