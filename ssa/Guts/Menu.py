@@ -24,7 +24,7 @@ def Menu(user, status, cart):
             #access db to get itemList
             os.system('cls' if os.name == 'nt' else 'clear')
             print ('*********** Our Products ************')
-            itemList = ['dildo', 'Grapefruit', 'KY', 'How to Use a Dildo by Pinky', 'crap', 'shit', 'something else', 'a book about something']
+            itemList = ['Boots', 'Grapefruit', 'Headphones', 'How to Use a Hammer by Pinky', 'Atlas', 'Shingles', 'Football', 'Great Expectations']
             i = 1
             for item in itemList:
                 print (str(i) + '. ' + item)
@@ -56,7 +56,7 @@ def Menu(user, status, cart):
             #get data from cart and add to list
             os.system('cls' if os.name == 'nt' else 'clear')
             print ('*********** Your Cart ************')
-            itemList = ['dildo', 'Grapefruit', 'KY', 'How to Use a Dildo by Pinky']
+            itemList = ['Boots', 'Grapefruit', 'Headphones', 'How to Use a Hammer by Pinky']
             i = 1
             for item in itemList:
                 print (str(i) + '. ' + item)
@@ -84,6 +84,7 @@ def Menu(user, status, cart):
                 erroneousInput(user, cart)
 
         elif selection == 4:
+            os.system('cls' if os.name == 'nt' else 'clear')
             exit()
 
         else:
@@ -134,7 +135,7 @@ def Menu(user, status, cart):
         elif selection == 3:
             os.system('cls' if os.name == 'nt' else 'clear')
             print ('***********' + user.username + ' Cart ************')
-            itemList = ['dildo', 'Grapefruit', 'KY', 'How to Use a Dildo by Pinky']
+            itemList = ['Boots', 'Grapefruit', 'Headphones', 'How to Use a Hammer by Pinky']
             i = 1
             for item in itemList:
                 print (str(i) + '. ' + item)
@@ -162,6 +163,7 @@ def Menu(user, status, cart):
                 erroneousInput(user, cart)
 
         elif selection == 4:
+            os.system('cls' if os.name == 'nt' else 'clear')
             exit()
 
         else:

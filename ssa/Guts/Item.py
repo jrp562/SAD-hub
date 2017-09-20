@@ -7,6 +7,7 @@ class Item:
         self.itemQuantity = 0
         self.itemName = ''
         self.itemDescription = ''
+        self.category = ''
         self.conn = sqlite3.connect(sqlite_file)
         cursor = conn.cursor()
 
@@ -24,12 +25,11 @@ class Item:
     def GetItemName(self):
     	return self.itemName
 
-   	def GetItemCost(self):
-   		return self.itemCost
+    def GetItemCost(self):
+        return self.itemCost
 
-   	def ChangeItemQuantity(self, newQuantity):
-   		cursor.execute('update inventory set item_quan=%s where item_id = %s', (newQuantity, self.itemName))
+    def ChangeItemQuantity(self, newQuantity):
+        cursor.execute('update inventory set item_quan=%s where item_id = %s', (newQuantity, self.itemName))
 
-   	#may be unneeded
-   	def ChangeItemCost(self):
-   		self.ItemCost = newCost
+    def ChangeItemCost(self):
+        self.ItemCost = newCost
