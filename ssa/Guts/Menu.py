@@ -13,6 +13,7 @@ def Menu(user, status, cart):
         print("4. Exit")
         selection = int(input("Please make a selection: "))
 
+
         if selection == 1:
             uname = input("Username: ")
             pword = input("Password: ")
