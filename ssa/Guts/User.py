@@ -49,6 +49,10 @@ class User:
         else:
             return self.address
 
+    def printUserAddress(self):
+        print (self.address[0])
+        print (self.address[1] + ", " + self.address[2] + " " + self.address[3]) 
+                
     def getUsername(self):
         if (self.status == 'not_logged_in' and self.userID != 0):
             loadUserData(self.userID)
