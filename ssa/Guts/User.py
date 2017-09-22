@@ -16,7 +16,7 @@ class User:
         sqlite_file = 'shop_db.db'
         conn = sqlite3.connect(sqlite_file)
         c = conn.cursor()
-        c.execute("SELECT * FROM Users WHERE USER_NAME=?", (self.username, ))
+        c.execute("SELECT * FROM USERS WHERE USER_NAME=?", (self.username, ))
         data = c.fetchall()
         # print (data)
     # check password and set variables if correct
@@ -39,7 +39,7 @@ class User:
     def getPurchaseHistory(self):
     # TODO: access db for a list of items and dates then put into itemList
         os.system('cls' if os.name == 'nt' else 'clear')
-        print('***********' + self.username + ' Purchase History ************')
+        print("*********** " + self.username + "'s Purchase History ************")
         itemList = ['Hammer', 'Grapefruit',
                     'Boots', 'How to Use a Hammer by Pinky']
         i = 1
@@ -87,7 +87,7 @@ class User:
 
     def setUserAddress(self):
         os.system('cls' if os.name == 'nt' else 'clear')
-        print('*********** Please enter Address ************')
+        print('*********** Please enter  your address ************')
         address[0] = input("Enter the number and street of your address: ")
         address[1] = input("Enter the city: ")
         address[2] = input("Enter the state: ")
