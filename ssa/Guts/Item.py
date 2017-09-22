@@ -45,6 +45,7 @@ class Toys (Item):
         self.ageRange = ''
         self.itemCategory = 'Toy'
 
+        # Connect and get pertinent info from db
         conn = sqlite3.connect(sqlite_file)
         cursor = conn.cursor()
         cursor.execute("SELECT age, isActionFigure FROM TOYS_INVENTORY WHERE ID = '%s' " % self.itemID)
@@ -63,6 +64,7 @@ class Book (Item):
         self.author = ''
         self.itemCategory = 'Book'
 
+        # Connect and get pertinent info from db
         conn = sqlite3.connect(sqlite_file)
         cursor = conn.cursor()
         cursor.execute("SELECT ISBN, author FROM BOOKS_TABLE WHERE ID = '%s' " % self.itemID)
@@ -80,6 +82,7 @@ class Household (Item):
         self.isLuxuryItem = False
         self.itemCategory = 'Household item'
 
+        # Connect and get pertinent info from db
         conn = sqlite3.connect(sqlite_file)
         cursor = conn.cursor()
         cursor.execute("SELECT room, isluxuryitem FROM HH_INVENTORY WHERE ID = '%s' " % self.itemID)
@@ -97,6 +100,7 @@ class Electronic (Item):
         self.category = ''
         self.itemCategory = 'electronic'
 
+        # Connect and get pertinent info from db
         conn = sqlite3.connect(sqlite_file)
         cursor = conn.cursor()
         cursor.execute("SELECT brand, category FROM ELEC_INVENTORY WHERE ID = '%s' " % self.itemID)
@@ -114,6 +118,7 @@ class Clothes (Item):
         self.section = ''
         self.itemCategory = 'clothing'
 
+        # Connect and get pertinent info from db
         conn = sqlite3.connect(sqlite_file)
         cursor = conn.cursor()
         cursor.execute("SELECT gender, section FROM ELEC_INVENTORY WHERE ID = '%s' " % self.itemID)
