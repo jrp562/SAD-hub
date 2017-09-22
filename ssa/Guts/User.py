@@ -76,7 +76,7 @@ class User:
             loadUserData(self.userID)
             return self.creditCardNumber
         elif (self.status == 'not_logged_in' and self.userID == 0):
-            # big error?
+            # prompt login?
             pass
         else:
             return self.creditCardNumber
