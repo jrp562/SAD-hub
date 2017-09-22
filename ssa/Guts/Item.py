@@ -17,7 +17,7 @@ class Item:
         conn = sqlite3.connect(sqlite_file)
         cursor = conn.cursor()
         cursor.execute("SELECT price, quantity, name, description FROM INVENTORY WHERE ID = '%s' " % self.itemID)
-        # Get the item info from the database.
+        # Get the item info from the database. Should only be one row with this information.
         row = cursor.fetchone()
         self.itemCost = row[0]
         self.itemQuantity = row[1]
