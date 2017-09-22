@@ -24,6 +24,8 @@ class Cart:
                     finalConfirm = input("Would you like to confirm this purchase? Y/N\n")
                     if finalConfirm == 'y' or finalConfirm == 'Y':
                         # put info and items in db
+                        for each in self.cartItems:
+                            each.changeItemQuantity()
                         break
             elif self.user.status == "logged_in":
                 # print address/credit card and ask if information displayed is correct
@@ -36,8 +38,9 @@ class Cart:
                     finalConfirm = input("Would you like to confirm this purchase? Y/N\n")
                     if finalConfirm == 'y' or finalConfirm == 'Y':
                         # put info and items in db
+                        for each in self.cartItems:
+                            each.changeItemQuantity()
                         break
-
 
     def itemTotal(self):
         total = 0.0
