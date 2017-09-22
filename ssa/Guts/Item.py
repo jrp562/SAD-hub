@@ -4,10 +4,10 @@ from ssa.Guts.db import conn, sqlite_file
 
 
 class Item:
-    def __init__(self):
-        self.itemId = ''
+    def __init__(self, itemid, quantity):
+        self.itemID = itemid
         self.itemCost = 0.00
-        self.itemQuantity = 0
+        self.itemQuantity = quantity
         self.itemName = ''
         self.itemDescription = ''
         self.category = ''
@@ -15,14 +15,13 @@ class Item:
         self.cursor = conn.cursor()
 
     def getItem(self):
-        data = self.cursor.execute('select item_id, item_cost, item_quan, item_name, item_desc from inventory')
+        self.cursor.execute('SELECT price, quantity, name, description FROM INVENTORY WHERE ID = ', self.itemId, ';')
+        # Get the
         row = self.cursor.fetchone()
-        for row in data:
-            self.itemId = row[0]
-            self.itemCost = row[1]
-            self.itemQuantity = row[2]
-            self.itemName = row[3]
-            self.itemDescription = row[4]
+        self.itemCost = row[0]
+        self.itemQuantity = row[1]
+        self.itemName = row[2]
+        self.itemDescription = row[3]
 
     def getItemName(self):
         return self.itemName
@@ -33,33 +32,34 @@ class Item:
     def changeItemQuantity(self, newQuantity):
         self.cursor.execute('update inventory set item_quan=%s where item_id = %s', (newQuantity, self.itemName))
 
-    def changeItemCost(self, newCost):
-        self.itemCost = newCost
-
 
 class Toys (Item):
-    def __init__(self):
-        super().__init__()
+    def __init__(self, itemID, quantity):
+        super().__init__(itemID, quantity)
         self.isActionFigure = False
         self.ageRange = ''
+        self.category = 'toy'
 
 
 class Book (Item):
-    def __init__(self):
-        super().__init__()
+    def __init__(self, itemID, quantity):
+        super().__init__(itemID, quantity)
         self.isbn = ''
         self.author = ''
+        self.category = 'book'
 
 
 class Household (Item):
-    def __init__(self):
-        super().__init__()
+    def __init__(self, itemID, quantity):
+        super().__init__(itemID, quantity)
         self.room = ''
         self.isLuxuryItem = False
+        self.category = 'household item'
 
 
 class Electronic (Item):
-    def __init__(self):
-        super().__init__()
+    def __init__(self,itemID, quantity):
+        super().__init__(itemID, quantity)
         self.brand = ''
         self.category = ''
+        self.category = 'electronic'
