@@ -105,6 +105,7 @@ class User:
         else:
             print("Would you like us to save your Card Number? (y/n): ")
             answer = input()
+            answer.lower()
             if (answer == 'y'):
                 sqlite_file = 'shop_db.db'
                 conn = sqlite3.connect(sqlite_file)
