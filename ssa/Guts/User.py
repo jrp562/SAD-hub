@@ -110,7 +110,11 @@ class User:
                 sqlite_file = 'shop_db.db'
                 conn = sqlite3.connect(sqlite_file)
                 c = conn.cursor()
+<<<<<<< HEAD
                 c.execute("INSERT INTO USERS (CCNUM) VALUES ({a1}) WHERE USER_ID = '%s'" % self.userID .\
+=======
+                c.execute("INSERT INTO USERS (CCNUM) VALUES ({a1}) WHERE USER_ID = %s", self.userID.\
+>>>>>>> ee5d5748a963d07ba02866939b126b7176305437
                         format(a1=self.creditCardNumber))
                 conn.close()
                 return True
