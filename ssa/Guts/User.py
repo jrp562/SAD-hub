@@ -16,7 +16,7 @@ class User:
         sqlite_file = 'shop_db.db'
         conn = sqlite3.connect(sqlite_file)
         c = conn.cursor()
-        c.execute("SELECT * FROM USERS WHERE USER_NAME=?", (self.username, ))
+        c.execute("SELECT * FROM Users WHERE USER_NAME=?", (self.username, ))
         data = c.fetchall()
         # print (data)
     # check password and set variables if correct
@@ -38,14 +38,9 @@ class User:
 
     def getPurchaseHistory(self):
     # TODO: access db for a list of items and dates then put into itemList
-        os.system('cls' if os.name == 'nt' else 'clear')
-        print("*********** " + self.username + "'s Purchase History ************")
         itemList = ['Hammer', 'Grapefruit',
                     'Boots', 'How to Use a Hammer by Pinky']
-        i = 1
-        for item in itemList:
-            print(str(i) + '. ' + item + '    Date: 12/23/2016')
-            i = i + 1
+        return itemList
 
     def getUserAddress(self):
         if (self.status == 'not_logged_in' and self.userID != 0):
@@ -87,7 +82,7 @@ class User:
 
     def setUserAddress(self):
         os.system('cls' if os.name == 'nt' else 'clear')
-        print('*********** Please enter  your address ************')
+        print('*********** Please enter Address ************')
         address[0] = input("Enter the number and street of your address: ")
         address[1] = input("Enter the city: ")
         address[2] = input("Enter the state: ")
@@ -114,7 +109,7 @@ class User:
                 sqlite_file = 'shop_db.db'
                 conn = sqlite3.connect(sqlite_file)
                 c = conn.cursor()
-                c.execute("INSERT INTO USERS (CCNUM) VALUES ({a1})".\
+                c.execute("INSERT INTO USERS (CCNUM) VALUES ({a1}) WHERE USER_ID = %s", self.userID.\
                         format(a1=self.creditCardNumber))
                 conn.close()
                 return True

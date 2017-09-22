@@ -3,7 +3,7 @@ def main():
     from ssa.Guts.User import User
     from ssa.Guts.Cart import Cart
     # from ssa.Guts.Menu import Menu
-    from ssa.Guts.AltMenu import mainMenu, menuChoice, menuLogin, menuCart, menuProducts, menuPurchaseHistory, menuPurchase, menuExit, erroneousInput, printMenuList, menuAddToCart, menuRemoveFromCart
+    from ssa.Guts.AltMenu import mainMenu, menuChoice, menuLogin, menuCart, menuProducts, menuPurchaseHistory, menuPurchase, menuExit, printMenuList, menuAddToCart, menuRemoveFromCart
 
     os.system('cls' if os.name == 'nt' else 'clear')
     user = User()

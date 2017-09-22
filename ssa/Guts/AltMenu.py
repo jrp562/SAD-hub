@@ -97,7 +97,8 @@ def menuPurchase(user, cart):
     pass
 
 def menuPurchaseHistory(user, cart):
-    user.getPurchaseHistory()
+    print('***********Your Purchase History ************')
+    printMenuList(user.getPurchaseHistory())
     mainMenu(user, cart)
 
 def menuAddToCart(user, cart):
@@ -108,11 +109,6 @@ def menuRemoveFromCart(user, cart):
 
 def menuExit(user, cart):
     exit()
-
-def erroneousInput(user, cart):
-    os.system('cls' if os.name == 'nt' else 'clear')
-    print("Invalid selection, please try again.")
-    menuChoice(user, cart, '0')
 
 def printMenuList(itemList):
     i = 0
