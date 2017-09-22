@@ -1,23 +1,30 @@
 import os
+import sqlite3
 from ssa.Guts.Cart import Cart
-
 
 class User:
     def __init__(self):
         self.userID = 0
         self.username = ''
-        self.password = ''
         self.address = []
         self.cardNumber = 0
         self.status = 'not_logged_in'
 
     def logIn(self, username, password):
         self.username = username
-        self.password = password
-        # check against db here and get userID
-        # self.userID = returned value from database
-        self.loadUserData(self.userID)
-        self.status = 'logged_in'
+    # check against db here and get userID
+        sqlite_file = 'shop_db.db'
+        conn = sqlite3.connect(sqlite_file)
+        c = conn.cursor()
+        c.execute("SELECT * FROM Users WHERE USER_NAME=?", (self.username, ))
+        data = c.fetchall()
+        # print (data)
+    # check password and set variables if correct
+        if (data[0][2] == password):
+            self.status = 'logged_in'
+            self.userID = data[0][0]
+            self.username = data[0][1]
+        conn.close()
         return self.status
 
     def logout(self):
@@ -51,8 +58,8 @@ class User:
 
     def printUserAddress(self):
         print (self.address[0])
-        print (self.address[1] + ", " + self.address[2] + " " + self.address[3]) 
-                
+        print (self.address[1] + ", " + self.address[2] + " " + self.address[3])
+
     def getUsername(self):
         if (self.status == 'not_logged_in' and self.userID != 0):
             loadUserData(self.userID)
