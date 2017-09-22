@@ -90,7 +90,7 @@ class User:
         sqlite_file = 'shop_db.db'
         conn = sqlite3.connect(sqlite_file)
         c = conn.cursor()
-        c.execute("INSERT INTO USERS (ADDRLINE1, CITY, STATE, ZIP) VALUES ({a1},{a2},{a3},{a4})".\
+        c.execute("INSERT INTO USERS (ADDRLINE1, CITY, STATE, ZIP) VALUES ({a1},{a2},{a3},{a4}) WHERE USER_ID = '%s'" % self.userID .\
                 format(a1=address[0], a2=address[1], a3=address[2], a4=address[3]))
         conn.close()
 
@@ -109,7 +109,7 @@ class User:
                 sqlite_file = 'shop_db.db'
                 conn = sqlite3.connect(sqlite_file)
                 c = conn.cursor()
-                c.execute("INSERT INTO USERS (CCNUM) VALUES ({a1}) WHERE USER_ID = %s", self.userID.\
+                c.execute("INSERT INTO USERS (CCNUM) VALUES ({a1}) WHERE USER_ID = '%s'" % self.userID .\
                         format(a1=self.creditCardNumber))
                 conn.close()
                 return True
