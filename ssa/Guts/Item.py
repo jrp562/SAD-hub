@@ -1,7 +1,5 @@
 import sqlite3
 
-from ssa.Guts.db import sqlite_file
-
 
 class Item:
     def __init__(self, itemid, quantity):
@@ -14,6 +12,7 @@ class Item:
         self.getItem()
 
     def getItem(self):
+        sqlite_file = 'shop_db.db'
         conn = sqlite3.connect(sqlite_file)
         cursor = conn.cursor()
         cursor.execute("SELECT price, quantity, name, description FROM INVENTORY WHERE ID = '%s' " % self.itemID)
@@ -26,6 +25,7 @@ class Item:
         conn.close()
 
     def changeItemQuantity(self):
+        sqlite_file = 'shop_db.db'
         conn = sqlite3.connect(sqlite_file)
         cursor = conn.cursor()
         # Get current quantity
@@ -46,6 +46,7 @@ class Toys (Item):
         self.itemCategory = 'Toy'
 
         # Connect and get pertinent info from db
+        sqlite_file = 'shop_db.db'
         conn = sqlite3.connect(sqlite_file)
         cursor = conn.cursor()
         cursor.execute("SELECT age, isActionFigure FROM TOYS_INVENTORY WHERE ID = '%s' " % self.itemID)
@@ -65,6 +66,7 @@ class Book (Item):
         self.itemCategory = 'Book'
 
         # Connect and get pertinent info from db
+        sqlite_file = 'shop_db.db'
         conn = sqlite3.connect(sqlite_file)
         cursor = conn.cursor()
         cursor.execute("SELECT ISBN, author FROM BOOKS_TABLE WHERE ID = '%s' " % self.itemID)
@@ -83,6 +85,7 @@ class Household (Item):
         self.itemCategory = 'Household item'
 
         # Connect and get pertinent info from db
+        sqlite_file = 'shop_db.db'
         conn = sqlite3.connect(sqlite_file)
         cursor = conn.cursor()
         cursor.execute("SELECT room, isluxuryitem FROM HH_INVENTORY WHERE ID = '%s' " % self.itemID)
@@ -101,6 +104,7 @@ class Electronic (Item):
         self.itemCategory = 'electronic'
 
         # Connect and get pertinent info from db
+        sqlite_file = 'shop_db.db'
         conn = sqlite3.connect(sqlite_file)
         cursor = conn.cursor()
         cursor.execute("SELECT brand, category FROM ELEC_INVENTORY WHERE ID = '%s' " % self.itemID)
@@ -119,6 +123,7 @@ class Clothes (Item):
         self.itemCategory = 'clothing'
 
         # Connect and get pertinent info from db
+        sqlite_file = 'shop_db.db'
         conn = sqlite3.connect(sqlite_file)
         cursor = conn.cursor()
         cursor.execute("SELECT gender, section FROM ELEC_INVENTORY WHERE ID = '%s' " % self.itemID)

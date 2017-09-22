@@ -21,6 +21,8 @@ def mainMenu(user, cart):
             menuChoice(user, cart, '3')
         elif selection == '4':
             menuChoice(user, cart, '9')
+        else:
+            menuChoice(user, cart, 'not_valid')
 
     elif (user.status == 'logged_in'):
         selection = '0'
@@ -39,12 +41,14 @@ def mainMenu(user, cart):
             menuChoice(user, cart, '3')
         elif selection == '4':
             menuChoice(user, cart, '9')
+        else:
+            menuChoice(user, cart, 'not_valid')
 
 
 def menuChoice(user, cart, selection):
-    os.system('clear')
+    os.system('cls' if os.name == 'nt' else 'clear')
     if selection == '':
-        menus['0']()
+        menus['0'](user, cart)
     else:
         try:
             menus[selection](user, cart)
@@ -75,6 +79,8 @@ def menuProducts(user, cart):
         menuChoice(user, cart, '6')
     elif selection == '3':
         menuChoice(user, cart, '0')
+    else:
+        menuChoice(user, cart, 'not_valid')
 
 def menuCart(user, cart):
     print ('*********** Your Cart ************')
@@ -92,13 +98,15 @@ def menuCart(user, cart):
         menuChoice(user, cart, '5')
     elif selection == '3':
         menuChoice(user, cart, '0')
+    else:
+        menuChoice(user, cart, 'not_valid')
 
 def menuPurchase(user, cart):
     pass
 
 def menuPurchaseHistory(user, cart):
     print('***********Your Purchase History ************')
-    printMenuList(user.getPurchaseHistory())
+    user.getPurchaseHistory()
     mainMenu(user, cart)
 
 def menuAddToCart(user, cart):

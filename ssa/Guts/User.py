@@ -6,7 +6,7 @@ class User:
     def __init__(self):
         self.userID = 0
         self.username = ''
-        self.address = []
+        self.address = ['', '', '', '']
         self.cardNumber = 0
         self.status = 'not_logged_in'
 
@@ -18,13 +18,17 @@ class User:
         c = conn.cursor()
         c.execute("SELECT * FROM Users WHERE USER_NAME=?", (self.username, ))
         data = c.fetchall()
-        # print (data)
+        print (data)
     # check password and set variables if correct
     # TODO: needs to be updated when db is updated
         if (data[0][2] == password):
             self.status = 'logged_in'
             self.userID = data[0][0]
             self.username = data[0][1]
+            self.address[0] = data[0][2]
+            self.address[1] = data[0][3]
+            self.address[2] = data[0][4]
+            self.address[3] = data[0][5]
         conn.close()
         return self.status
 
@@ -37,10 +41,15 @@ class User:
         self.status = 'not_logged_in'
 
     def getPurchaseHistory(self):
-    # TODO: access db for a list of items and dates then put into itemList
-        itemList = ['Hammer', 'Grapefruit',
-                    'Boots', 'How to Use a Hammer by Pinky']
-        return itemList
+        sqlite_file = 'shop_db.db'
+        conn = sqlite3.connect(sqlite_file)
+        cursor = conn.cursor()
+        cursor.execute("SELECT ITEM_NAME, DATES FROM PURCHASE_HISTORY WHERE USER_ID = ?", (self.userID, ))
+        row = cursor.fetchall()
+        # print (row)
+        for item in row:
+            print (item[0] + '\t\t\t' + item[1])
+        return
 
     def getUserAddress(self):
         if (self.status == 'not_logged_in' and self.userID != 0):
@@ -110,11 +119,7 @@ class User:
                 sqlite_file = 'shop_db.db'
                 conn = sqlite3.connect(sqlite_file)
                 c = conn.cursor()
-<<<<<<< HEAD
                 c.execute("INSERT INTO USERS (CCNUM) VALUES ({a1}) WHERE USER_ID = '%s'" % self.userID .\
-=======
-                c.execute("INSERT INTO USERS (CCNUM) VALUES ({a1}) WHERE USER_ID = %s", self.userID.\
->>>>>>> ee5d5748a963d07ba02866939b126b7176305437
                         format(a1=self.creditCardNumber))
                 conn.close()
                 return True
