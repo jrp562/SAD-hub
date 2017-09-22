@@ -1,13 +1,13 @@
 import os
 import sqlite3
-from ssa.Guts.Cart import Cart
+from ssa.Guts.AltCart import Cart
 
 class User:
     def __init__(self):
         self.userID = 0
         self.username = ''
         self.address = ['', '', '', '']
-        self.cardNumber = 0
+        self.cardData = ['', '', '', '', '']
         self.status = 'not_logged_in'
 
     def logIn(self, username, password):
@@ -52,80 +52,51 @@ class User:
         return
 
     def getUserAddress(self):
-        if (self.status == 'not_logged_in' and self.userID != 0):
-            loadUserData(self.userID)
-            return self.address
-        elif (self.status == 'not_logged_in' and self.userID == 0):
-            # big error?
-            pass
-        else:
-            return self.address
+        return self.address
 
     def printUserAddress(self):
-        print (self.address[0])
-        print (self.address[1] + ", " + self.address[2] + " " + self.address[3])
+        print (str(self.address[0]))
+        print (str(self.address[1]) + ", " + str(self.address[2]) + " " + str(self.address[3]))
 
     def getUsername(self):
-        if (self.status == 'not_logged_in' and self.userID != 0):
-            loadUserData(self.userID)
-            return self.username
-        elif (self.status == 'not_logged_in' and self.userID == 0):
-            # big error?
-            pass
-        else:
-            return self.username
+        return self.username
 
     def getCCNUM(self):
-        if (self.status == 'not_logged_in' and self.userID != 0):
-            loadUserData(self.userID)
-            return self.creditCardNumber
-        elif (self.status == 'not_logged_in' and self.userID == 0):
-            # prompt login?
-            pass
-        else:
-            return self.creditCardNumber
-
-    def loadUserData(self, userID):
-        # take list from db and update values
-        pass
+        return self.cardData[1]
 
     def setUserAddress(self):
         os.system('cls' if os.name == 'nt' else 'clear')
-        print('*********** Please enter Address ************')
-        address[0] = input("Enter the number and street of your address: ")
-        address[1] = input("Enter the city: ")
-        address[2] = input("Enter the state: ")
-        address[3] = int(input("Enter your zipcode: "))
+        print('*********** Please Enter Your Address ************')
+        self.address[0] = input("Enter the number and street of your address: ")
+        self.address[1] = input("Enter the city: ")
+        self.address[2] = input("Enter the state: ")
+        self.address[3] = input("Enter your zipcode: ")
         sqlite_file = 'shop_db.db'
         conn = sqlite3.connect(sqlite_file)
         c = conn.cursor()
-        c.execute("INSERT INTO USERS (ADDRLINE1, CITY, STATE, ZIP) VALUES ({a1},{a2},{a3},{a4}) WHERE USER_ID = '%s'" % self.userID .\
-                format(a1=address[0], a2=address[1], a3=address[2], a4=address[3]))
+        # TODO: fix this shit
+        c.execute("INSERT INTO USERS (ADDRLINE1, CITY, STATE, ZIP) VALUES (?,?,?,?) WHERE USER_ID=?", (self.address[0], self.address[1], self.address[2], self.address[3], self.userID))
+        conn.commit()
         conn.close()
+        return True
 
     def setUserCCNUM(self):
         os.system('cls' if os.name == 'nt' else 'clear')
         print('*********** Please enter your card Number ************')
-        self.cardNumber = int(input("Card Number:"))
-        if (len(str(self.cardNumber)) != 10):
+        self.cardData[0] = input("Name on Card: ")
+        self.cardData[1] = int(input("Card Number:"))
+        self.cardData[2] = input("ccv: ")
+        self.cardData[3] = input("Expiration Month: ")
+        self.cardData[4] = input("Expiration Year: ")
+        if (len(str(self.cardData[1])) != 10):
             os.system('cls' if os.name == 'nt' else 'clear')
             print(' Invalid Card Number! ')
             return False
         else:
-            print("Would you like us to save your Card Number? (y/n): ")
-            answer = input()
-            answer.lower()
-            if (answer == 'y'):
-                sqlite_file = 'shop_db.db'
-                conn = sqlite3.connect(sqlite_file)
-                c = conn.cursor()
-                c.execute("INSERT INTO USERS (CCNUM) VALUES ({a1}) WHERE USER_ID = '%s'" % self.userID .\
-                        format(a1=self.creditCardNumber))
-                conn.close()
-                return True
-            elif (answer == 'n'):
-                print("Card number not saved.")
-                return True
-            else:
-                print("User input not recognized. Card number not saved.")
-                return True
+            return True
+
+    def printUserCCNUM(self):
+        print("*********** Card Info ************")
+        for item in self.cardData:
+            print(str(item))
+        pass

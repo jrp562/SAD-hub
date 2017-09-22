@@ -1,7 +1,7 @@
 def main():
     import os
     from ssa.Guts.User import User
-    from ssa.Guts.Cart import Cart
+    from ssa.Guts.AltCart import Cart
     # from ssa.Guts.Menu import Menu
     from ssa.Guts.AltMenu import mainMenu, menuChoice, menuLogin, menuCart, menuProducts, menuPurchaseHistory, menuPurchase, menuExit, printMenuList, menuAddToCart, menuRemoveFromCart
 

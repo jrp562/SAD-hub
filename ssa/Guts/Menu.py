@@ -1,6 +1,6 @@
 import os
 from ssa.Guts.User import User
-from ssa.Guts.Cart import Cart
+from ssa.Guts.AltCart import Cart
 
 def Menu(user, status, cart):
     if (status == 'not_logged_in'):

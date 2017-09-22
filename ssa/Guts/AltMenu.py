@@ -1,6 +1,6 @@
 import os
 from ssa.Guts.User import User
-from ssa.Guts.Cart import Cart
+from ssa.Guts.AltCart import Cart
 
 
 def mainMenu(user, cart):
@@ -71,7 +71,7 @@ def menuProducts(user, cart):
     itemList = ['Boots', 'Grapefruit', 'Headphones', 'How to Use a Hammer by Pinky', 'Atlas', 'Shingles', 'Football', 'Great Expectations']
     printMenuList(itemList)
     print ('')
-    print ('************* Options *****************')
+    print ('************* Product Options *****************')
     print("1. Add an item to cart.")
     print("2. Go Back.")
     selection = input("Please make a selection: ")
@@ -102,10 +102,15 @@ def menuCart(user, cart):
         menuChoice(user, cart, 'not_valid')
 
 def menuPurchase(user, cart):
-    pass
+    print('*********** Purchase ************')
+    if  not cart.purchaseCart():
+        menus['3'](user, cart)
+    else:
+        print ("Thank You!\n")
+        menus['1'](user, cart)
 
 def menuPurchaseHistory(user, cart):
-    print('***********Your Purchase History ************')
+    print('*********** Your Purchase History ************')
     user.getPurchaseHistory()
     mainMenu(user, cart)
 
