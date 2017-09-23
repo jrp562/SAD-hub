@@ -12,7 +12,7 @@ class Cart:
     def showItems(self):
         for each in self.cartItems:
             print((each.itemID, each.itemName, each.itemQuantity, each.itemCost), sep='\n')
-            print("Total Cost: ", self.itemTotal())
+        print(self.itemTotal())
 
     def purchaseCart(self):
         while 1:
@@ -59,13 +59,13 @@ class Cart:
         for each in self.cartItems:
             total += each.itemCost * each.itemQuantity
 
-        print("$", total)
+        print("Total $", total)
 
     def addItem(self, itemID, quantity):
         newItem = Item(itemID, quantity)
         self.cartItems.append(newItem)
 
     def removeItem(self, itemID):
-        for i in range(len(self.cartItems)):
+        for i in range(len(self.cartItems) - 1):
             if self.cartItems[i].itemID == itemID:
                 del self.cartItems[i]

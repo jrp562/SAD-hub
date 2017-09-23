@@ -21,6 +21,7 @@ class User:
         data = c.fetchone()
         if data is None:
             print("No such username/password combination found. Please try again.\n")
+            input("Press Enter To Continue.")
             conn.close()
             return self.status
         else:
