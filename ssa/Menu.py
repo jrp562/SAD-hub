@@ -111,7 +111,7 @@ def menuAddToCart(user, cart):
         erroneousInput(user, cart)
     conn = sqlite3.connect('shop_db.db')
     c = conn.cursor()
-    for row in c.execute("SELECT s.*, i.quantity FROM '%s' as s, INVENTORY as i WHERE s.ID = i.ID" % selection):
+    for row in c.execute("SELECT s.*, i.price, i.quantity FROM '%s' as s, INVENTORY as i WHERE s.ID = i.ID" % selection):
         print(row)
     itemID = int(input("Please provide the ID number of the item you would like to add to the cart: "))
     quantity = int(input("Please provide the quantity of the item you would like to add: "))

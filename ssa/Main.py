@@ -1,7 +1,7 @@
 import os
-from ssa.User import User
-from ssa.Cart import Cart
-from ssa.Menu import mainMenu, menuLogin, menuCart, menuProducts, menuPurchaseHistory, menuPurchase, \
+from User import User
+from Cart import Cart
+from Menu import mainMenu, menuLogin, menuCart, menuProducts, menuPurchaseHistory, menuPurchase, \
     menuExit, menuAddToCart, menuRemoveFromCart
 
 

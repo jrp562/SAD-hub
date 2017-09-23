@@ -57,6 +57,7 @@ class User:
                 print("Credit card: ", card)
                 print("Shipping Address: ", address)
                 print("Total Cart Price: ", total)
+                print('\n')
                 total = 0
                 cartID = each[3]
             print("Item: ", each[0], "\tQuantity: ", each[1], "\tPrice: ", each[2])

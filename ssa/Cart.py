@@ -1,5 +1,5 @@
 import os
-from ssa.Item import Item
+from Item import Item
 import sqlite3
 
 
@@ -43,11 +43,12 @@ class Cart:
                             num = each[0]
                         num += 1
                         # Enter into Purchase History
+                        address = str(self.user.address)
                         for each in self.cartItems:
-                            cursor.execute("INSERT INTO PURCHASE_HISTORY VALUES (?, ?, ?, ?, ?, ?, ?)", (num, each.itemID, each.itemCost, self.user.userID, creditCard, each.itemQuantity, self.user.address,))
-
+                            cursor.execute("INSERT INTO PURCHASE_HISTORY VALUES (?, ?, ?, ?, ?, ?, ?)", (num, each.itemID, each.itemCost, self.user.userID, creditCard, each.itemQuantity, address))
+                            conn.commit()
                         # commit changes to DB
-                        conn.commit()
+
                         conn.close()
                         for each in self.cartItems:
                             each.changeItemQuantity()
