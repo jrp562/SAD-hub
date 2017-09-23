@@ -40,16 +40,35 @@ class User:
         self.address = []
         self.status = 'not_logged_in'
 
-    # TODO: this needs to be worked on
     def getPurchaseHistory(self):
         sqliteFile = 'shop_db.db'
         conn = sqlite3.connect(sqliteFile)
         cursor = conn.cursor()
-        cursor.execute("SELECT ITEM_NAME, DATES FROM PURCHASE_HISTORY WHERE USER_ID = ?", (self.userID,))
-        row = cursor.fetchall()
-        # print (row)
-        for item in row:
-            print(item[0] + '\t\t\t' + item[1])
+        cursor.execute("SELECT inv.name, cart.item_quantity, cart.price, cart.cart_id, cart.ccard, "
+                       "cart.address FROM INVENTORY as inv, "
+                       "PURCHASE_HISTORY as cart WHERE inv.ID = cart.item AND cart.owner = ?", (self.userID,))
+        results = cursor.fetchall()
+        cartID = 1
+        total = 0
+        card = 0
+        address = ''
+        for each in results:
+            if each[3] != cartID:
+                print("Credit card: ", card)
+                print("Shipping Address: ", address)
+                print("Total Cart Price: ", total)
+                total = 0
+                cartID = each[3]
+            print("Item: ", each[0], "\tQuantity: ", each[1], "\tPrice: ", each[2])
+            total += each[1] * each[2]
+            card = each[4]
+            address = each[5]
+        # Print the last cart's card, address, and total.
+        print("Credit card: ", card)
+        print("Shipping Address: ", address)
+        print("Total Cart Price: ", total)
+        # Close the connection
+        conn.close()
         return
 
     def getUserAddress(self):

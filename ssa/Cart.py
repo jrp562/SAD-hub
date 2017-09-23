@@ -1,5 +1,6 @@
 import os
 from ssa.Item import Item
+import sqlite3
 
 
 class Cart:
@@ -16,19 +17,9 @@ class Cart:
     def purchaseCart(self):
         while 1:
             if self.user.status == "not_logged_in":
-                # prompt for address/credit card if not logged in
-                address = input("Please enter your address for shipping purposes: \n")
-                creditCard = input("Please provide your credit card number: \n")
-                print("Shipping Address: \n", address, "\nCredit Card Number: \n", creditCard)
-                # prompt for confirmation
-                confirm = input("Is the information displayed correct? Y/N\n")
-                if confirm == 'Y' or confirm == 'y':
-                    finalConfirm = input("Would you like to confirm this purchase? Y/N\n")
-                    if finalConfirm == 'y' or finalConfirm == 'Y':
-                        # put info and items in db
-                        for each in self.cartItems:
-                            each.changeItemQuantity()
-                        break
+                os.system('cls' if os.name == 'nt' else 'clear')
+                print("Please Log In To Purchase.")
+                break
             elif self.user.status == "logged_in":
                 # print address/credit card and ask if information displayed is correct
                 creditCard = input("Please provide your credit card number: \n")
@@ -41,6 +32,23 @@ class Cart:
                     finalConfirm = input("Would you like to confirm this purchase? Y/N\n")
                     if finalConfirm == 'y' or finalConfirm == 'Y':
                         # put info and items in db
+                        sqliteFile = 'shop_db.db'
+                        conn = sqlite3.connect(sqliteFile)
+                        cursor = conn.cursor()
+                        cursor.execute("SELECT DISTINCT cart_id FROM PURCHASE_HISTORY WHERE owner = ?", (self.user.userID,))
+                        results = cursor.fetchall()
+                        # Get next cartID
+                        num = 0
+                        for each in results:
+                            num = each[0]
+                        num += 1
+                        # Enter into Purchase History
+                        for each in self.cartItems:
+                            cursor.execute("INSERT INTO PURCHASE_HISTORY VALUES (?, ?, ?, ?, ?, ?, ?)", (num, each.itemID, each.itemCost, self.user.userID, creditCard, each.itemQuantity, self.user.address,))
+
+                        # commit changes to DB
+                        conn.commit()
+                        conn.close()
                         for each in self.cartItems:
                             each.changeItemQuantity()
                         break
