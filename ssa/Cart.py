@@ -1,5 +1,5 @@
 import os
-from ssa.Guts.Item import Item
+from ssa.Item import Item
 
 
 class Cart:
@@ -8,8 +8,10 @@ class Cart:
         self.user = user
         self.cartItems = []
 
-    def showItems(self, cartItems):
-        print(*cartItems, sep='\n')
+    def showItems(self):
+        for each in self.cartItems:
+            print((each.itemID, each.itemName, each.itemQuantity, each.itemCost), sep='\n')
+            print("Total Cost: ", self.itemTotal())
 
     def purchaseCart(self):
         while 1:
@@ -29,9 +31,10 @@ class Cart:
                         break
             elif self.user.status == "logged_in":
                 # print address/credit card and ask if information displayed is correct
-                print("Shipping Address: \n")
+                creditCard = input("Please provide your credit card number: \n")
+                print("Credit Card Number: \n", creditCard)
+                print("Shipping Address: ")
                 self.user.printUserAddress()
-                print("Credit Card Number: \n", self.user.cardNumber)
                 # prompt for confirmation
                 confirm = input("Is the information displayed correct? Y/N\n")
                 if confirm == 'Y' or confirm == 'y':
@@ -54,6 +57,6 @@ class Cart:
         self.cartItems.append(newItem)
 
     def removeItem(self, itemID):
-        for each in self.cartItems:
-            if each.itemID == itemID:
-                del self.cartItems[each]
+        for i in range(len(self.cartItems)):
+            if self.cartItems[i].itemID == itemID:
+                del self.cartItems[i]
