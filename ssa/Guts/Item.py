@@ -16,13 +16,12 @@ class Item:
     def getItem(self):
         conn = sqlite3.connect(sqlite_file)
         cursor = conn.cursor()
-        cursor.execute("SELECT price, quantity, name, description FROM INVENTORY WHERE ID = '%s' " % self.itemID)
+        cursor.execute("SELECT price, name, description FROM INVENTORY WHERE ID = '%s' " % self.itemID)
         # Get the item info from the database. Should only be one row with this information.
         row = cursor.fetchone()
         self.itemCost = row[0]
-        self.itemQuantity = row[1]
-        self.itemName = row[2]
-        self.itemDescription = row[3]
+        self.itemName = row[1]
+        self.itemDescription = row[2]
         conn.close()
 
     def changeItemQuantity(self):
